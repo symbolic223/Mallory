@@ -10,7 +10,72 @@ class PrikolsCog(commands.Cog):
         self.bot = bot
         self.status.start()
 
-    
+    @commands.command()
+    @commands.is_nsfw()
+    async def order(self, ctx, user: disnake.User):
+        if user.id == ctx.author.id:
+            await ctx.send('Еблан, я на тебя заказ выполнять не буду.')
+            return
+        if user.id == self.bot.user.id:
+            await ctx.send("иди нахуй, паскуда")
+            return
+        await ctx.send("Связываюсь с сучкой...")
+        try:
+            babax = await user.send(f"Пользователь {ctx.author.mention} заказал вам меня. Не желаете развлечься? (на размышление 30 секунд)")
+            await babax.add_reaction("✅")
+            await babax.add_reaction("❌")
+
+            def check(reaction, u):
+                return u == user and str(reaction.emoji) in ["✅", "❌"] and reaction.message.id == babax.id
+
+            try:
+                reaction, u = await self.bot.wait_for('reaction_add', timeout=30.0, check=check)
+                if str(reaction.emoji) == "✅":
+                    await ctx.send(f"Сучка на {user.name} одобрил выполнение заказика, щас как высушу ему писюнчик нахуй.")
+                    await user.send(f'> **Меллори**: Ммм... Ну давай, хули')
+                    await asyncio.sleep(3)
+                    await user.send(f'> **Меллори и {user.name}**: *раздеваются*')
+                    await asyncio.sleep(3)
+                    await user.send(f'> **Меллори**: *начинает отсасывать хуй {user.name}')
+                    await asyncio.sleep(3)
+                    await user.send('> *прошло 5 минут*')
+                    await asyncio.sleep(3)
+                    await user.send('- **Меллори**: *ложится на кровать*')
+                    await asyncio.sleep(3)
+                    await user.send(f'- **{user.name}**: *водит хуем по пиздёнке*')
+                    await asyncio.sleep(3)
+                    await user.send(f'- **{user.name}**: *вставляет и начинает трахать*')
+                    await asyncio.sleep(3)
+                    await user.send('> **Меллори**: **АХ! ДАВАЙ, ТРАХАЙ МЕНЯ!**')
+                    await asyncio.sleep(3)
+                    await user.send(f'- **{user.name}**: _Ну че, сука, нравится?_')
+                    await asyncio.sleep(3)
+                    await user.send('> **Меллори**: _О, да, продолжай...._')
+                    await asyncio.sleep(3)
+                    await user.send('*прошло полчаса, Меллори вся потекла*')
+                    await user.send('> **Меллори**: _Прошу, кончи в меня!!_')
+                    await asyncio.sleep(3)
+                    await user.send(f'- **{user.name}**: *готов кончить*')
+                    await asyncio.sleep(3)
+                    await user.send(f'> **Меллори**: *очень громко стонет*')
+                    await asyncio.sleep(3)
+                    await user.send(f'- **{user.name}**: *обкончал всю пизду Меллори*')
+                    await asyncio.sleep(3)
+                    await user.send(f'> **Меллори**: _Ну че, скажи спасибо {ctx.author.mention}. А я пошла еще с кем-нибудь поебусь._')
+                    await ctx.send(f'Успешно ~~трахнула~~ выполнила заказ на {user.mention}.')
+
+                elif str(reaction.emoji) == "❌":
+                    await ctx.send(f'Этот пидор отказался. Ну и больно надо трахаться с такими.')
+                else:
+                    pass
+                    
+            except asyncio.TimeoutError:
+                await ctx.send(f'Короче, он не ответил вовремя. Ну и хуй с ним, с другим поебусь.')
+        except:
+            await ctx.send("К сожалению, этому еблану не удалось написать.")
+
+
+
     @commands.command()
     @commands.is_nsfw()
     async def services(self, ctx, action: str = commands.Param(choices=['Минет', 'Анал', 'Дрочка', '69'])):
@@ -150,7 +215,7 @@ class PrikolsCog(commands.Cog):
         if message.author == self.bot.user:
             return
         
-        if (self.bot.user.mention) in message.content:
+        if (self.bot.user.mention) in message.content and 'order' not in message.content:
             await message.reply(random.choice(replies))
             await message.add_reaction("🖕")
             await message.add_reaction("🅿️")
@@ -159,6 +224,7 @@ class PrikolsCog(commands.Cog):
             await message.add_reaction("🇴")
             await message.add_reaction("🇷")
             return
+        self.bot.process_commands(message)
 
     @tasks.loop(seconds = 10)
     async def status(self):
