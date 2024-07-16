@@ -65,7 +65,7 @@ class PrikolsCog(commands.Cog):
                     await ctx.send(f'Успешно ~~трахнула~~ выполнила заказ на {user.mention}.')
 
                 elif str(reaction.emoji) == "❌":
-                    await ctx.send(f'Этот пидор отказался. Ну и больно надо трахаться с такими.')
+                    await ctx.reply(f'Этот пидор отказался. Ну и больно надо трахаться с такими.')
                 else:
                     pass
                     
