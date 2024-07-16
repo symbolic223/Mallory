@@ -224,7 +224,7 @@ class PrikolsCog(commands.Cog):
             await message.add_reaction("🇴")
             await message.add_reaction("🇷")
             return
-        self.bot.process_commands(message)
+        #self.bot.process_commands(message)
 
     @tasks.loop(seconds = 10)
     async def status(self):
