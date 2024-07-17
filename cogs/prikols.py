@@ -3,6 +3,11 @@ import platform
 import random
 import disnake
 from disnake.ext import tasks, commands
+import sqlite3
+
+conn = sqlite3.connect("Orders.db")
+cursor = conn.cursor()
+
 
 replies = ['Нахуй иди', 'Хули орешь?', 'Купи мою подписку на ютубе! Будешь смотреть мои сюжеты первым!', 'Я тебя забаню, падла']
 class PrikolsCog(commands.Cog):
@@ -79,6 +84,8 @@ class PrikolsCog(commands.Cog):
     @commands.command()
     @commands.is_nsfw()
     async def services(self, ctx, action: str = commands.Param(choices=['Минет', 'Анал', 'Дрочка', '69'])):
+        cursor.execute("SELECT orders_count FROM orders WHERE user_id = ?", (ctx.author.id,))
+        order = cursor.fetchone()
         if action.lower() == 'минет':
             await ctx.send(f'**Меллори**: Ну... приступаю')
             await asyncio.sleep(3)
@@ -100,6 +107,14 @@ class PrikolsCog(commands.Cog):
             await ctx.send(f'**Меллори**: *еблет в сперме*')
             await asyncio.sleep(3)
             await ctx.send(f'**Меллори**: Всё, с тебя 300 бачей, сучка')
+            if order is None:
+                cursor.execute("INSERT INTO orders (user_id, orders_count) VALUES (?, 1)", (ctx.author.id, ))
+                conn.commit()
+            else:
+                orders = order[0]
+                orders += 1
+                cursor.execute("UPDATE orders SET orders_count = ? WHERE user_id = ?", (orders, ctx.author.id))
+                conn.commit()
             
         elif action.lower() == 'анал':
             await ctx.send(f'> **Меллори**: Ммм... Ну давай, хули')
@@ -132,6 +147,14 @@ class PrikolsCog(commands.Cog):
             await ctx.send('> **Меллори**: *весь рот и лицо в сперме*')
             await asyncio.sleep(3)
             await ctx.send('> **Меллори**: _Неплохой у тебя револьвер, ковбой, а теперь гони 900 бачей нахуй_')
+            if order is None:
+                cursor.execute("INSERT INTO orders (user_id, orders_count) VALUES (?, 1)", (ctx.author.id, ))
+                conn.commit()
+            else:
+                orders = order[0]
+                orders += 1
+                cursor.execute("UPDATE orders SET orders_count = ? WHERE user_id = ?", (orders, ctx.author.id))
+                conn.commit()
             
         elif action.lower() == 'дрочка':
             await ctx.send('> **Меллори**: Тебя это так заводит? Окей..')
@@ -154,6 +177,14 @@ class PrikolsCog(commands.Cog):
             await ctx.send('> **Меллори**: *захлёбывается в сперме*')
             await asyncio.sleep(3)
             await ctx.send('> **Меллори**: Не забываемые *откашливается* ощущения... С тебя 1400 бачей за такой крутой мув, сынок')
+            if order is None:
+                cursor.execute("INSERT INTO orders (user_id, orders_count) VALUES (?, 1)", (ctx.author.id, ))
+                conn.commit()
+            else:
+                orders = order[0]
+                orders += 1
+                cursor.execute("UPDATE orders SET orders_count = ? WHERE user_id = ?", (orders, ctx.author.id))
+                conn.commit()
             
         elif action == '69':
             await ctx.send('> **Меллори**: Ну, давай, раздевайся...')
@@ -176,6 +207,14 @@ class PrikolsCog(commands.Cog):
             await ctx.send(f'> **Меллори**: *ебейше сквиртанула на еблет {ctx.author.name}*')
             await asyncio.sleep(3)
             await ctx.send(f'> **Меллори**: *Как же я ебейше тебя намочила, {ctx.author.name}, давай свои 2200 бачей, а то после этого мне нужно идти жестко гантели 20 кг поднимать.*')
+            if order is None:
+                cursor.execute("INSERT INTO orders (user_id, orders_count) VALUES (?, 1)", (ctx.author.id, ))
+                conn.commit()
+            else:
+                orders = order[0]
+                orders += 1
+                cursor.execute("UPDATE orders SET orders_count = ? WHERE user_id = ?", (orders, ctx.author.id))
+                conn.commit()
         else:
             await ctx.send('Абалдуй, у меня нет такой услуги. Я могу делать: минет, анал, дрочку или 69. А то что ты попросил это просто пиздец какой-то иди нахуй.')
 
