@@ -19,7 +19,7 @@ class PrikolsCog(commands.Cog):
     @commands.command()
     @commands.is_nsfw()
     async def order(self, ctx, user: disnake.User):
-        cursor.execute("SELECT orders_count FROM uorders WHERE user_id = ?", (user.id,))
+        cursor.execute("SELECT orders_count FROM uorders WHERE user_id = ?", (ctx.author.id,))
         uorder = cursor.fetchone()
         if user.id == ctx.author.id:
             await ctx.send('Еблан, я на тебя заказ выполнять не буду.')
@@ -71,14 +71,7 @@ class PrikolsCog(commands.Cog):
                     await asyncio.sleep(3)
                     await user.send(f'> **Меллори**: _Ну че, скажи спасибо {ctx.author.mention}. А я пошла еще с кем-нибудь поебусь._')
                     await ctx.send(f'Успешно ~~трахнула~~ выполнила заказ на {user.mention}.')
-                    if uorder is None:
-                        cursor.execute("INSERT INTO uorders (user_id, orders_count) VALUES (?, 1)", (ctx.author.id,))
-                        conn.commit()
-                    else:
-                        uorders = uorder[0]
-                        uorders += 1
-                        cursor.execute("UPDATE uorders SET orders_count = ? WHERE user_id = ?", (uorders, ctx.author.id))
-                        conn.commit()
+
                 elif str(reaction.emoji) == "❌":
                     await ctx.reply(f'Этот пидор отказался. Ну и больно надо трахаться с такими.')
                 else:
@@ -88,7 +81,11 @@ class PrikolsCog(commands.Cog):
                 await ctx.reply(f'Короче, он не ответил вовремя. Ну и хуй с ним, с другим поебусь.')
         except:
             await ctx.reply("К сожалению, этому еблану не удалось написать.")
-
+        if uorder is None:
+            cursor.execute("INSERT INTO uorders (user_id, orders_count) VALUES (?, 1)", (ctx.author.id, ))
+        else:
+            cursor.execute("UPDATE uorders SET orders_count = orders_count + 1 WHERE user_id = ?", (ctx.author.id,))
+        conn.commit()
 
 
     @commands.command()

@@ -39,7 +39,7 @@ class OrdersCog(commands.Cog):
                 e.add_field(name="Заказы:", value="Пользователь не делал заказов.")
             else:
                 uorders = uorder[0]
-                e.add_field(name="Заказы на других пользователей:", value=uorders)
+                e.add_field(name="Заказы:", value=uorders)
             e.set_thumbnail(url = user.avatar)
             await ctx.reply(embed=e)
 
