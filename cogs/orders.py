@@ -19,7 +19,6 @@ class OrdersCog(commands.Cog):
         self.bot = bot
 
     @commands.command()
-    @commands.is_nsfw()
     async def count(self, ctx, user: disnake.User = None):
         if user == None:
             user = ctx.author
