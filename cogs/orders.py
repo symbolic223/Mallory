@@ -9,6 +9,10 @@ cursor.execute('''CREATE TABLE IF NOT EXISTS orders (
                 user_id INTEGER PRIMARY KEY,
                 orders_count INTEGER
 )''')
+cursor.execute('''CREATE TABLE IF NOT EXISTS uorders (
+                user_id INTEGER PRIMARY KEY,
+                orders_count INTEGER
+)''')
 
 class OrdersCog(commands.Cog):
     def __init__(self, bot: commands.Bot):
@@ -18,9 +22,12 @@ class OrdersCog(commands.Cog):
     async def count(self, ctx, user: disnake.User):
         cursor.execute("SELECT orders_count FROM orders WHERE user_id = ?", (user.id, ))
         order = cursor.fetchone()
+        cursor.execute("SELECT orders_count FROM uorders WHERE user_id = ?", (user.id,))
+        uorder = cursor.fetchone()
         if order == None:
             await ctx.reply("Не нашла челикса в таблице. Пускай заказ сделает чтоле.")
             return
+
         else:
             orders = order[0]
             e = disnake.Embed(
@@ -28,6 +35,12 @@ class OrdersCog(commands.Cog):
                 color=0xFF00E4
             )
             e.add_field(name="Я трахнула его:", value=f"{orders} раз")
+            if uorder == None:
+                e.add_field(name="Заказы:", value="Пользователь не делал заказов.")
+            else:
+                uorders = uorder[0]
+                e.add_field(name="Заказы на других пользователей:", value=uorders)
+            e.set_thumbnail(url = user.avatar)
             await ctx.reply(embed=e)
 
 def setup(bot: commands.Bot):
