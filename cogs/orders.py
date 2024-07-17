@@ -19,7 +19,10 @@ class OrdersCog(commands.Cog):
         self.bot = bot
 
     @commands.command()
-    async def count(self, ctx, user: disnake.User):
+    @commands.is_nsfw()
+    async def count(self, ctx, user: disnake.User = None):
+        if user == None:
+            user = ctx.author
         cursor.execute("SELECT orders_count FROM orders WHERE user_id = ?", (user.id, ))
         order = cursor.fetchone()
         cursor.execute("SELECT orders_count FROM uorders WHERE user_id = ?", (user.id,))
