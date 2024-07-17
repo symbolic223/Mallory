@@ -72,7 +72,7 @@ class PrikolsCog(commands.Cog):
             except asyncio.TimeoutError:
                 await ctx.reply(f'Короче, он не ответил вовремя. Ну и хуй с ним, с другим поебусь.')
         except:
-            await ctx.send("К сожалению, этому еблану не удалось написать.")
+            await ctx.reply("К сожалению, этому еблану не удалось написать.")
 
 
 
