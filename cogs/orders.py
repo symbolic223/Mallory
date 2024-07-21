@@ -33,7 +33,7 @@ class OrdersCog(commands.Cog):
         else:
             orders = order[0]
             e = disnake.Embed(
-                title=f"Кол-во заказов пользователя {user.name}",
+                title="Кол-во ваших заказов" if user == ctx.author else f"Кол-во заказов пользователя {user.name}",
                 color=0xFF00E4
             )
             e.add_field(name="Я трахнула его:", value=f"{orders} раз")
