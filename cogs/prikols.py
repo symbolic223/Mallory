@@ -8,12 +8,44 @@ import sqlite3
 conn = sqlite3.connect("Orders.db")
 cursor = conn.cursor()
 
+fuck = [
+    "https://cdn.discordapp.com/attachments/1221283286710485113/1264555298375598091/z_3.gif?ex=669e4c65&is=669cfae5&hm=0ec4e60315ed48e1500b741dea9a889e833f224f9452998d2ed1518a5c1181a2&",
+    "https://cdn.discordapp.com/attachments/1221283286710485113/1264555298811678841/z_2.gif?ex=669e4c65&is=669cfae5&hm=332b450adc8233e4e627586b4cb036cb183df665a5a8cf4f31c476a3b4075c0d&",
+    "https://cdn.discordapp.com/attachments/1221283286710485113/1264555299298345113/z_1.gif?ex=669e4c65&is=669cfae5&hm=6625a957b4e7de0efa2f6900f0785a3fae66d6b396e25883c3ac14df6a9852ed&"
+]
+suck = [
+    "https://cdn.discordapp.com/attachments/667029937676615723/1264555887255752704/tumblr_o4a47pYNGR1uao6a1o2_400.gif?ex=669e4cf1&is=669cfb71&hm=34af47332de7b2994332169b354b3f3901b9c3fb1306225e3c04b30fcd69264e&",
+    "https://cdn.discordapp.com/attachments/667029937676615723/1264555949973311519/14e4b8c33533b6a1bb2ee3b82114a5cf1b9fd3a6.gif?ex=669e4d00&is=669cfb80&hm=91cf298ff6f61135af12240593e0e520386ebf204297d16cd0cf096845925c93&",
+    "https://cdn.discordapp.com/attachments/667029937676615723/1264555979840946227/sucking6.gif?ex=669e4d07&is=669cfb87&hm=f2737c79c31ae0a87042c30d030fe0244d6fa24c4ad9103172dd75096b7f00a6&"
+]
 
 replies = ['Нахуй иди', 'Хули орешь?', 'Купи мою подписку на ютубе! Будешь смотреть мои сюжеты первым!', 'Я тебя забаню, падла']
 class PrikolsCog(commands.Cog):
     def __init__(self, bot: commands.Bot):
         self.bot = bot
         self.status.start()
+
+    @commands.command()
+    @commands.is_nsfw()
+    async def fuck(self, ctx, user: disnake.User):
+        e = disnake.Embed(
+            title = f"{ctx.author.display_name} выебал {user.display_name}",
+            color = 0x9B00FF
+        )
+        e.set_image(url=random.choice(fuck))
+        await ctx.send(embed=e)
+
+    @commands.command()
+    @commands.is_nsfw()
+    async def suck(self, ctx, user: disnake.User):
+        e = disnake.Embed(
+            title=f"{ctx.author.display_name} отсосал {user.display_name}",
+            color=0x9B00FF
+        )
+        e.set_image(url=random.choice(suck))
+        await ctx.send(embed=e)
+
+
 
 
     @commands.command()
