@@ -29,7 +29,7 @@ class PrikolsCog(commands.Cog):
     @commands.is_nsfw()
     async def fuck(self, ctx, user: disnake.User):
         e = disnake.Embed(
-            title = f"{ctx.author.display_name} выебал {user.display_name}",
+            title = f"{ctx.author.display_name} выебал Меллори" if user == self.bot.user else f"{ctx.author.display_name} выебал {user.display_name}",
             color = 0x9B00FF
         )
         e.set_image(url=random.choice(fuck))
@@ -39,7 +39,7 @@ class PrikolsCog(commands.Cog):
     @commands.is_nsfw()
     async def suck(self, ctx, user: disnake.User):
         e = disnake.Embed(
-            title=f"{ctx.author.display_name} отсосал {user.display_name}",
+            title=f"{ctx.author.display_name} отсосал Меллори" if user == self.bot.user else f"{ctx.author.display_name} отсосал {user.display_name}",
             color=0x9B00FF
         )
         e.set_image(url=random.choice(suck))
@@ -293,7 +293,7 @@ class PrikolsCog(commands.Cog):
         if message.author == self.bot.user:
             return
         
-        if (self.bot.user.mention) in message.content and 'order' not in message.content:
+        if (self.bot.user.mention) in message.content and 'order' not in message.content and 'fuck' not in message.content and 'suck' not in message.content:
             await message.reply(random.choice(replies))
             await message.add_reaction("🖕")
             await message.add_reaction("🅿️")
