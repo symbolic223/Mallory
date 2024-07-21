@@ -27,7 +27,7 @@ class PrikolsCog(commands.Cog):
 
     @commands.command()
     @commands.is_nsfw()
-    async def fuck(self, ctx, user: disnake.User):
+    async def fuck(self, ctx, user: disnake.Member):
         e = disnake.Embed(
             title = f"{ctx.author.display_name} выебал Меллори" if user == self.bot.user else f"{ctx.author.display_name} выебал {user.display_name}",
             color = 0x9B00FF
@@ -37,7 +37,7 @@ class PrikolsCog(commands.Cog):
 
     @commands.command()
     @commands.is_nsfw()
-    async def suck(self, ctx, user: disnake.User):
+    async def suck(self, ctx, user: disnake.Member):
         e = disnake.Embed(
             title=f"{ctx.author.display_name} отсосал Меллори" if user == self.bot.user else f"{ctx.author.display_name} отсосал {user.display_name}",
             color=0x9B00FF
