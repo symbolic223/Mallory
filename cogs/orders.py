@@ -36,7 +36,7 @@ class OrdersCog(commands.Cog):
                 title="Кол-во ваших заказов" if user == ctx.author else f"Кол-во заказов пользователя {user.name}",
                 color=0xFF00E4
             )
-            e.add_field(name="Я трахнула его:", value=f"{orders} раз")
+            e.add_field(name="Я трахнула тебя:" if user == ctx.author else f"Я трахнула его:", value=f"{orders} раз")
             if uorder == None:
                 e.add_field(name="Заказы:", value="Пользователь не делал заказов.")
             else:
