@@ -30,7 +30,7 @@ class PrikolsCog(commands.Cog):
     @commands.is_nsfw()
     async def fuck(self, ctx, user: disnake.Member):
         e = disnake.Embed(
-            title = f"{ctx.author.display_name} выебал Меллори" if user == self.bot.user else f"{ctx.author.display_name} выебал {user.display_name}",
+            title = f"{ctx.author.display_name} выебал Меллори" if user == self.bot.user else f'{ctx.author.display_name} выебал сам себя' if user == ctx.author else f"{ctx.author.display_name} выебал {user.display_name}",
             color = 0x9B00FF
         )
         e.set_image(url=random.choice(fuck))
@@ -40,7 +40,7 @@ class PrikolsCog(commands.Cog):
     @commands.is_nsfw()
     async def suck(self, ctx, user: disnake.Member):
         e = disnake.Embed(
-            title=f"{ctx.author.display_name} отсосал Меллори" if user == self.bot.user else f"{ctx.author.display_name} отсосал {user.display_name}",
+            title=f"{ctx.author.display_name} отсосал Меллори" if user == self.bot.user else f'{ctx.author.display_name} отсосал сам себе' if user == ctx.author else f"{ctx.author.display_name} отсосал {user.display_name}",
             color=0x9B00FF
         )
         e.set_image(url=random.choice(suck))
