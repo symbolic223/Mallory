@@ -10,8 +10,12 @@ class ErrorCog(commands.Cog):
         em = str(e)
 
         if isinstance(e, commands.CommandInvokeError):
+            guild = self.bot.fetch_guild(1218228336883663020)
+            # канал для лога ошибок
+            channel = self.bot.get_channel(1221283286710485113)
             em = "Че еблан что-ли? Иди к моему разрабу че то пиши, я сама хз"
             print(e)
+            await channel.send(f"Я насрала ошибкой: {e}. Исправь пж.")
 
         elif isinstance(e, commands.NotOwner):
             em = "Нахуй иди, чмо"
@@ -50,8 +54,12 @@ class ErrorCog(commands.Cog):
         em = str(e)
 
         if isinstance(e, commands.CommandInvokeError):
+            guild = self.bot.fetch_guild(1218228336883663020)
+            # канал для лога ошибок
+            channel = self.bot.get_channel(1221283286710485113)
             em = "Че еблан что-ли? Иди к моему разрабу че то пиши, я сама хз"
             print(e)
+            await channel.send(f"Я насрала ошибкой: {e}. Исправь пж.")
 
         elif isinstance(e, commands.NotOwner):
             em = "Нахуй иди, чмо"
