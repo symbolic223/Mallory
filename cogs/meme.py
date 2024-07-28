@@ -9,8 +9,7 @@ class MemeCog(commands.Cog):
     @commands.slash_command(name="meme", description="Сгенерировать мем")
     async def memegen(self, inter: disnake.ApplicationCommandInteraction, img: disnake.Attachment, *, toptext: str,
                       bottomtext: str = None):
-        if bottomtext is None:
-            bottomtext = toptext
+
 
         try:
 
@@ -26,22 +25,23 @@ class MemeCog(commands.Cog):
             except IOError:
                 font = ImageFont.load_default()
 
-            # Draw top text
+
             top_text_bbox = draw.textbbox((0, 0), toptext, font=font)
             top_text_width = top_text_bbox[2] - top_text_bbox[0]
             top_x = (image.width - top_text_width) / 2
             top_y = 5
             draw.text((top_x, top_y), toptext, font=font, fill=(255, 255, 255), stroke_width=2, stroke_fill=(0, 0, 0))
 
-            # Draw bottom text
-            bottom_text_bbox = draw.textbbox((0, 0), bottomtext, font=font)
-            bottom_text_width = bottom_text_bbox[2] - bottom_text_bbox[0]
-            bottom_text_height = bottom_text_bbox[3] - bottom_text_bbox[1]
-            bottom_x = (image.width - bottom_text_width) / 2
-            bottom_y = image.height - bottom_text_height - 10
-            draw.text((bottom_x, bottom_y), bottomtext, font=font, fill=(255, 255, 255), stroke_width=2,
-                      stroke_fill=(0, 0, 0))
-
+            if bottomtext:
+                bottom_text_bbox = draw.textbbox((0, 0), bottomtext, font=font)
+                bottom_text_width = bottom_text_bbox[2] - bottom_text_bbox[0]
+                bottom_text_height = bottom_text_bbox[3] - bottom_text_bbox[1]
+                bottom_x = (image.width - bottom_text_width) / 2
+                bottom_y = image.height - bottom_text_height - 35
+                draw.text((bottom_x, bottom_y), bottomtext, font=font, fill=(255, 255, 255), stroke_width=2,
+                          stroke_fill=(0, 0, 0))
+            else:
+                pass
 
             buffered = io.BytesIO()
             image.save(buffered, format="PNG")
