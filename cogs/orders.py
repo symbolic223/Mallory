@@ -1,3 +1,5 @@
+import random
+
 import disnake
 from disnake.ext import commands
 import sqlite3
@@ -56,10 +58,13 @@ class OrdersCog(commands.Cog):
 
     @commands.Cog.listener()
     async def on_member_join(self, member):
-
+        wel = random.choice(welcome)
+        if '{user.name}' in wel:
+            wel = wel.replace('{user.name}', member.name)
+        wel_desc = random.choice(welcome_desc)
         e = disnake.Embed(
-            title=title,
-            description=description,
+            title=wel,
+            description=wel_desc,
             color=disnake.Colour.random()
         )
         e.set_thumbnail(url=member.avatar)
@@ -67,12 +72,15 @@ class OrdersCog(commands.Cog):
         await self.bot.get_channel(1269342064169189417).send(embed=e)
     @commands.Cog.listener()
     async def on_member_remove(self, member):
-
+        poka = random.choice(bye)
+        if '{user.name}' in poka:
+            poka = poka.replace('{user.name}', member.name)
+        poka_desc = random.choice(bye_desc)
 
 
         b = disnake.Embed(
-            title=title,
-            description=description,
+            title=poka,
+            description=poka_desc,
             color=disnake.Colour.random()
         )
         b.set_thumbnail(url=member.avatar)
