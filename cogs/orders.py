@@ -13,6 +13,18 @@ cursor.execute('''CREATE TABLE IF NOT EXISTS uorders (
                 user_id INTEGER PRIMARY KEY,
                 orders_count INTEGER
 )''')
+cursor.execute('''CREATE TABLE IF NOT EXISTS welcome (
+                title TEXT,
+                description TEXT
+)
+                
+''')
+cursor.execute('''CREATE TABLE IF NOT EXISTS bye (
+                title TEXT,
+                description TEXT
+)
+
+''')
 
 class OrdersCog(commands.Cog):
     def __init__(self, bot: commands.Bot):
@@ -46,6 +58,77 @@ class OrdersCog(commands.Cog):
             e.add_field(name="Заказы:", value=uorders)
         e.set_thumbnail(url = user.avatar)
         await ctx.reply(embed=e)
+    @commands.slash_command(name = "welcome", description="прив)")
+    @commands.has_permissions(ban_members = True)
+    async def welcome(self, inter: disnake.ApplicationCommandInteraction, title: str, description: str):
+        cursor.execute("SELECT title, description FROM welcome")
+        welcome = cursor.fetchone()
+        if welcome:
+            cursor.execute("UPDATE welcome SET title = ?, description = ?", (title, description))
+            conn.commit()
+            await inter.send("Сохранено")
+
+        else:
+            cursor.execute("INSERT INTO welcome VALUES (?, ?)", (title, description))
+            conn.commit()
+            await inter.send("Сохранено")
+
+    @commands.slash_command(name="bye", description="прив)")
+    @commands.has_permissions(ban_members=True)
+    async def bye(self, inter: disnake.ApplicationCommandInteraction, title: str, description: str):
+        cursor.execute("SELECT title, description FROM bye")
+        bye = cursor.fetchone()
+        if bye:
+            cursor.execute("UPDATE bye SET title = ?, description = ?", (title, description))
+            conn.commit()
+            await inter.send("Сохранено")
+
+        else:
+            cursor.execute("INSERT INTO bye VALUES (?, ?)", (title, description))
+            conn.commit()
+            await inter.send("Сохранено")
+
+    @commands.Cog.listener()
+    async def on_member_join(self, member):
+        cursor.execute("SELECT title, description FROM welcome")
+        welcome = cursor.fetchone()
+        if welcome == []:
+            return
+        if welcome:
+            title, description = welcome
+            if '{user.name}' in description:
+                description = description.format(user=member)
+            if '{user.name}' in title:
+                title = title.format(user=member)
+            e = disnake.Embed(
+                title=title,
+                description=description,
+                color=disnake.Colour.random()
+            )
+            e.set_thumbnail(url=member.avatar)
+            e.set_footer(text=f"Теперь нас {len(member.guild.members)} членов.")
+            await self.bot.get_channel(1269342064169189417).send(embed=e)
+    @commands.Cog.listener()
+    async def on_member_remove(self, member):
+        cursor.execute("SELECT title, description FROM bye")
+        bye = cursor.fetchone()
+        if bye == []:
+            return
+        if bye:
+            title, description = bye
+            if '{user.name}' in description:
+                description = description.format(user=member)
+            if '{user.name}' in title:
+                title = title.format(user=member)
+            b = disnake.Embed(
+                title=title,
+                description=description,
+                color=disnake.Colour.random()
+            )
+            b.set_thumbnail(url=member.avatar)
+            b.set_footer(text=f"Теперь нас {len(member.guild.members)} членов.")
+            await self.bot.get_channel(1269342064169189417).send(embed=b)
+
 
 def setup(bot: commands.Bot):
     bot.add_cog(OrdersCog(bot))
