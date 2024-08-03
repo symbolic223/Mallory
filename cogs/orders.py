@@ -15,13 +15,13 @@ cursor.execute('''CREATE TABLE IF NOT EXISTS uorders (
 )''')
 cursor.execute('''CREATE TABLE IF NOT EXISTS welcome (
                 title TEXT,
-                description TEXT,
+                description TEXT
 )
                 
 ''')
 cursor.execute('''CREATE TABLE IF NOT EXISTS bye (
                 title TEXT,
-                description TEXT,
+                description TEXT
 )
 
 ''')
@@ -61,42 +61,70 @@ class OrdersCog(commands.Cog):
     @commands.slash_command(name = "welcome", description="прив)")
     @commands.has_permissions(ban_members = True)
     async def welcome(self, inter: disnake.ApplicationCommandInteraction, title: str, description: str):
-        cursor.execute("INSERT INTO welcome VALUES (?, ?)", (title, description))
-        conn.commit()
-        await inter.send("Сохранено")
+        cursor.execute("SELECT title, description FROM welcome")
+        welcome = cursor.fetchone()
+        if welcome == []:
+            cursor.execute("INSERT INTO welcome VALUES (?, ?)", (title, description))
+            conn.commit()
+            await inter.send("Сохранено")
+        else:
+            cursor.execute("UPDATE welcome SET title = ?, description = ?", (title, description))
+            conn.commit()
+            await inter.send("Сохранено")
 
     @commands.slash_command(name="bye", description="прив)")
     @commands.has_permissions(ban_members=True)
-    async def welcome(self, inter: disnake.ApplicationCommandInteraction, title: str, description: str):
-        cursor.execute("INSERT INTO bye VALUES (?, ?)", (title, description))
-        conn.commit()
-        await inter.send("Сохранено")
+    async def bye(self, inter: disnake.ApplicationCommandInteraction, title: str, description: str):
+        cursor.execute("SELECT title, description FROM bye")
+        welcome = cursor.fetchone()
+        if welcome == []:
+            cursor.execute("INSERT INTO bye VALUES (?, ?)", (title, description))
+            conn.commit()
+            await inter.send("Сохранено")
+        else:
+            cursor.execute("UPDATE bye SET title = ?, description = ?", (title, description))
+            conn.commit()
+            await inter.send("Сохранено")
 
     @commands.Cog.listener()
-    async def on_member_join(self):
+    async def on_member_join(self, member):
         cursor.execute("SELECT title, description FROM welcome")
-        welcome = cursor.fetchall()
+        welcome = cursor.fetchone()
         if welcome == []:
             return
-        for i in welcome:
+        if welcome:
+            title, description = welcome
+            if '{user.name}' in description:
+                description = description.format(user=member)
+            if '{user.name}' in title:
+                title = title.format(user=member)
             e = disnake.Embed(
-                title = i[0],
-                description = i[1],
-                color = disnake.Colour.random()
+                title=title,
+                description=description,
+                color=disnake.Colour.random()
             )
+            e.set_thumbnail(url=member.avatar)
+            e.set_footer(text=f"Теперь нас {len(member.guild.members)} членов.")
             await self.bot.get_channel(1221283286710485113).send(embed=e)
     @commands.Cog.listener()
     async def on_member_remove(self):
         cursor.execute("SELECT title, description FROM bye")
-        bye = cursor.fetchall()
+        bye = cursor.fetchone()
         if bye == []:
             return
-        for i in bye:
+        if bye:
+            title, description = bye
+            if '{user.name}' in description:
+                description = description.format(user=member)
+            if '{user.name}' in title:
+                title = title.format(user=member)
             e = disnake.Embed(
-                title = i[0],
-                description = i[1],
-                color = disnake.Colour.random()
+                title=title,
+                description=description,
+                color=disnake.Colour.random()
             )
+            e.set_thumbnail(url=member.avatar)
+            e.set_footer(text=f"Теперь нас {len(member.guild.members)} членов.")
             await self.bot.get_channel(1221283286710485113).send(embed=e)
 
 def setup(bot: commands.Bot):
