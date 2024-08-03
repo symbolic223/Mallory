@@ -107,7 +107,7 @@ class OrdersCog(commands.Cog):
             )
             e.set_thumbnail(url=member.avatar)
             e.set_footer(text=f"Теперь нас {len(member.guild.members)} членов.")
-            await self.bot.get_channel(1221283286710485113).send(embed=e)
+            await self.bot.get_channel(1269342064169189417).send(embed=e)
     @commands.Cog.listener()
     async def on_member_remove(self, member):
         cursor.execute("SELECT title, description FROM bye")
@@ -127,7 +127,7 @@ class OrdersCog(commands.Cog):
             )
             b.set_thumbnail(url=member.avatar)
             b.set_footer(text=f"Теперь нас {len(member.guild.members)} членов.")
-            await self.bot.get_channel(1221283286710485113).send(embed=b)
+            await self.bot.get_channel(1269342064169189417).send(embed=b)
 
 
 def setup(bot: commands.Bot):
