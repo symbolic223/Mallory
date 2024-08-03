@@ -4,7 +4,7 @@ import random
 import disnake
 from disnake.ext import tasks, commands
 import sqlite3
-# sous
+
 conn = sqlite3.connect("Orders.db")
 cursor = conn.cursor()
 
