@@ -17,7 +17,8 @@ fuck = [
 suck = [
     "https://cdn.discordapp.com/attachments/667029937676615723/1264555887255752704/tumblr_o4a47pYNGR1uao6a1o2_400.gif?ex=669e4cf1&is=669cfb71&hm=34af47332de7b2994332169b354b3f3901b9c3fb1306225e3c04b30fcd69264e&",
     "https://cdn.discordapp.com/attachments/667029937676615723/1264555949973311519/14e4b8c33533b6a1bb2ee3b82114a5cf1b9fd3a6.gif?ex=669e4d00&is=669cfb80&hm=91cf298ff6f61135af12240593e0e520386ebf204297d16cd0cf096845925c93&",
-    "https://cdn.discordapp.com/attachments/667029937676615723/1264555979840946227/sucking6.gif?ex=669e4d07&is=669cfb87&hm=f2737c79c31ae0a87042c30d030fe0244d6fa24c4ad9103172dd75096b7f00a6&"
+    "https://cdn.discordapp.com/attachments/667029937676615723/1264555979840946227/sucking6.gif?ex=669e4d07&is=669cfb87&hm=f2737c79c31ae0a87042c30d030fe0244d6fa24c4ad9103172dd75096b7f00a6&",
+    "https://cdn.discordapp.com/attachments/667029937676615723/1269762624678264904/c210d50b-5691-4dee-a4c4-cac0902be564.gif?ex=66b13e18&is=66afec98&hm=b6579c0c7a7df59ac20c1a116ea3f95c148769e122697454a1d206fa0ae2f64d&"
 ]
 
 replies = ['Нахуй иди', 'Хули орешь?', 'Купи мою подписку на ютубе! Будешь смотреть мои сюжеты первым!', 'Я тебя забаню, падла']
