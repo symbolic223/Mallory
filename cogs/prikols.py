@@ -337,21 +337,3 @@ class PrikolsCog(commands.Cog):
 
 def setup(bot: commands.Bot):
     bot.add_cog(PrikolsCog(bot))
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
