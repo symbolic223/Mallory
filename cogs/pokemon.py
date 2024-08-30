@@ -1,15 +1,16 @@
 import disnake
 from disnake.ext import commands
 import pokebase as pb
-
+import random
 class PokemonCog(commands.Cog):
     def __init__(self, bot):
         self.bot = bot
 
     @commands.command()
     async def pok(self, ctx, number: int):
+        male_percentage = 0
+        female_percentage = 0
         try:
-
             pokemon = pb.pokemon(number)
             name = pokemon.name.capitalize()
             gender_rate = pb.pokemon_species(number).gender_rate
@@ -35,6 +36,8 @@ class PokemonCog(commands.Cog):
             embed.add_field(name="Имя", value=name, inline=True)
             embed.add_field(name="Пол", value=gender, inline=True)
             embed.add_field(name="Типы", value=types, inline=True)
+            embed.add_field(name="Можно ебать?", value = "Да" if female_percentage > male_percentage else "Возможно" if female_percentage == male_percentage else "Нет", inline=True)
+
 
             if sprite_url:
                 embed.set_thumbnail(url=sprite_url)
