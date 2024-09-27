@@ -10,6 +10,19 @@ class PokemonCog(commands.Cog):
     async def pok(self, ctx, number: int):
         male_percentage = 0
         female_percentage = 0
+        if number >= 1026:
+            j = disnake.Embed(
+                title="Информация о покемоне: Danil Demin",
+                color=0x00f3ff
+            )
+            j.add_field(name="Имя:", value="Данил Дёмин", inline=True)
+            j.add_field(name="Ориентация:", value="Пидорок", inline=True)
+            j.add_field(name="Типы:", value="Гений, миллиардер, плейбой, филантроп", inline=True)
+            j.add_field(name="Можно ебать?", value="Нужно", inline=True)
+            j.set_thumbnail(url = "https://cdn.discordapp.com/attachments/1221283286710485113/1289138530244886548/0320b707c4a05dc7.png?ex=66f7bb50&is=66f669d0&hm=c17e667ecd5adebb90d56109471f37c71a0ca03705d60359a4470034c0cbda50&")
+            await ctx.send(embed = j)
+            return
+
         try:
             pokemon = pb.pokemon(number)
             name = pokemon.name.capitalize()
