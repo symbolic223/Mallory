@@ -30,12 +30,36 @@ suck = [
     "https://cdn.discordapp.com/attachments/667029937676615723/1270855216518004747/d1be215c92594c0183697e13cbb2afed.gif?ex=66b731e6&is=66b5e066&hm=89e992d90b2f80be47b75216132f2cd9f13480b01ea40a71ef7eccc04f89880a&",
     "https://cdn.discordapp.com/attachments/667029937676615723/1270854839781429299/79a22912fe6578724a3f1d8219cc86ab.gif?ex=66b7318d&is=66b5e00d&hm=8966b1ecbd39222b67eb7241441efa81fcbc5babcd956913983ae0296b78b817&"
 ]
+rfooter = ['Когда $екс?', 'Бойкиссер - чмо', 'Чем ближе крах империи тем безумнее ее законы', '{user1.display_name} долбоеб!', 'Поебитесь уже, голубки']
 
 replies = ['Нахуй иди', 'Хули орешь?', 'Купи мою подписку на ютубе! Будешь смотреть мои сюжеты первым!', 'Я тебя забаню, падла']
 class PrikolsCog(commands.Cog):
     def __init__(self, bot: commands.Bot):
         self.bot = bot
         self.status.start()
+
+
+    @commands.slash_command(name = "ship", description = "Когда половые отношения?")
+    @commands.is_nsfw()
+    async def ship(self, inter, user1: disnake.Member, user2: disnake.Member):
+        a = random.randint(0, 100)
+        if user1 == user2:
+            await inter.response.send_message("Ну и иди соси сам себе")
+            return
+        elif user1 == self.bot.user or user2 == self.bot.user:
+            await inter.response.send_message("Я и так тебя найду и выебу)))")
+            return
+        e = disnake.Embed(
+            title = f"{user1.display_name} и {user2.display_name} любят друг друга на {a}%",
+            description=f"Если они забудут гандоны, то их отгрызка будут звать: {user1.display_name[:4] + user2.display_name[-5:]}",
+            color = 0xff009e
+        )
+        f = random.choice(rfooter)
+        if '{user1.display_name}' in f:
+            f = f.replace('{user1.display_name}', user1.display_name)
+        e.set_footer(text = f, icon_url = self.bot.user.avatar.url)
+        await inter.response.send_message(embed = e)
+
 
     @commands.command()
     @commands.is_nsfw()
@@ -57,8 +81,9 @@ class PrikolsCog(commands.Cog):
         e.set_image(url=random.choice(suck))
         await ctx.send(embed=e)
 
-
-
+    @commands.slash_command(name="ping", description="Показывает пинг бота.")
+    async def ping(self, inter: disnake.ApplicationCommandInteraction):
+        await inter.response.send_message(f"Пинг бота: {round(self.bot.latency * 1000)}ms")
 
     @commands.command()
     @commands.is_nsfw()
