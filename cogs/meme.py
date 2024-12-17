@@ -2,6 +2,7 @@ import disnake
 from disnake.ext import commands
 from PIL import Image, ImageDraw, ImageFont, UnidentifiedImageError
 import io
+
 class MemeCog(commands.Cog):
     def __init__(self, bot: commands.Bot):
         self.bot = bot
@@ -10,18 +11,12 @@ class MemeCog(commands.Cog):
     async def memegen(self, inter: disnake.ApplicationCommandInteraction, img: disnake.Attachment, *, toptext: str,
                       bottomtext: str = None):
 
-
         try:
-
             image = Image.open(io.BytesIO(await img.read()))
             draw = ImageDraw.Draw(image)
-
-
             base_font_size = max(20, int(image.height / 10))
-
-
             try:
-                font = ImageFont.truetype("impact.ttf", base_font_size)
+                font = ImageFont.truetype("/System/Library/Fonts/Supplemental/Impact.ttf", base_font_size)
             except IOError:
                 font = ImageFont.load_default()
 
@@ -46,10 +41,7 @@ class MemeCog(commands.Cog):
             buffered = io.BytesIO()
             image.save(buffered, format="PNG")
             buffered.seek(0)
-
-
             await inter.send(file=disnake.File(buffered, filename="meme.png"))
-
         except UnidentifiedImageError:
             await inter.send('Похоже, что это не фотография :)')
 

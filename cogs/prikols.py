@@ -104,7 +104,6 @@ class PrikolsCog(commands.Cog):
 
             def check(reaction, u):
                 return u == user and str(reaction.emoji) in ["✅", "❌"] and reaction.message.id == babax.id
-
             try:
                 reaction, u = await self.bot.wait_for('reaction_add', timeout=30.0, check=check)
                 if str(reaction.emoji) == "✅":
@@ -350,8 +349,6 @@ class PrikolsCog(commands.Cog):
         if all_members:
             member = random.choice(all_members)
             await self.bot.change_presence(activity=disnake.Activity(type=disnake.ActivityType.watching, name=f'на аппарат {member.name}'))
-
-
 
     @status.before_loop
     async def before_status(self):

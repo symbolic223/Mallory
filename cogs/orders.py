@@ -35,9 +35,6 @@ class OrdersCog(commands.Cog):
         cursor.execute("SELECT orders_count FROM uorders WHERE user_id = ?", (user.id,))
         uorder = cursor.fetchone()
 
-
-
-
         e = disnake.Embed(
             title="Кол-во ваших заказов" if user == ctx.author else f"Кол-во заказов пользователя {user.name}",
             color=0xFF00E4

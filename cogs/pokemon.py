@@ -36,11 +36,7 @@ class PokemonCog(commands.Cog):
 
 
             types = ", ".join([t.type.name.capitalize() for t in pokemon.types])
-
-
             sprite_url = pokemon.sprites.front_default
-
-
             embed = disnake.Embed(
                 title=f"Информация о покемоне: {name}",
                 color=disnake.Color.blue() if male_percentage > female_percentage else 0xff00c1 if male_percentage < female_percentage else 0x8000ff
