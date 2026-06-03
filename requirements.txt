@@ -1,0 +1,5 @@
+disnake
+setuptools
+disnake-jishaku
+pokebase
+pillow

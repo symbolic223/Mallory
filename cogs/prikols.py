@@ -19,7 +19,10 @@ fuck = [
     "https://cdn.discordapp.com/attachments/667029937676615723/1272670438941528086/5c0cb97e-175b-4eaf-92d1-51f56be2ae72.gif?ex=66bc7af5&is=66bb2975&hm=41000dc1710be28510dcd730d38d1ed6e7be2c058becc5a0abb41c3b2916ca55&",
     "https://cdn.discordapp.com/attachments/667029937676615723/1272670424433426523/2feb2e63-ddfb-4cfa-9cff-0e23e6093e3e.gif?ex=66bc7af2&is=66bb2972&hm=8345032975230c27b1d5346f2e4b3a338b8967ced4c62270488ba7c7c8ac7a99&",
     "https://cdn.discordapp.com/attachments/667029937676615723/1272670411917889576/2edf4021-801a-4cfa-b78a-d2e1f82d762c.gif?ex=66bc7aef&is=66bb296f&hm=fed0e9ff0b253c1d63526c68d6e03896a6ccc9d7ddee4adab697e43ee26f120f&",
-    "https://cdn.discordapp.com/attachments/667029937676615723/1272670385497702521/3cfe1373-da53-4208-9f00-65a4202e0d67.gif?ex=66bc7ae8&is=66bb2968&hm=0228579a8103c10184fa5f4d487f2c16d93bb87ec404aebc36ffd6c6a037c890&"
+    "https://cdn.discordapp.com/attachments/667029937676615723/1272670385497702521/3cfe1373-da53-4208-9f00-65a4202e0d67.gif?ex=66bc7ae8&is=66bb2968&hm=0228579a8103c10184fa5f4d487f2c16d93bb87ec404aebc36ffd6c6a037c890&",
+    "https://media.discordapp.net/attachments/827289915388985404/1178171866884612106/28.gif?ex=6777fece&is=6776ad4e&hm=d099933d2261d9723a7847fa276fbefad67c4eaa793187a47a0c359a029c4061&",
+    "https://media.discordapp.net/attachments/827289915388985404/1031442011334639646/1665985332730.gif?ex=6778217a&is=6776cffa&hm=a5b9b6f3188a8865871e1d10d8ce85d44cad382ece57090a4e2f000b4f0da309&",
+    "https://cdn.donmai.us/original/19/dd/19dd4e2d45356f22afc77fef77573f3c.gif"
 ]
 suck = [
     "https://cdn.discordapp.com/attachments/667029937676615723/1264555887255752704/tumblr_o4a47pYNGR1uao6a1o2_400.gif?ex=669e4cf1&is=669cfb71&hm=34af47332de7b2994332169b354b3f3901b9c3fb1306225e3c04b30fcd69264e&",
@@ -144,7 +147,7 @@ class PrikolsCog(commands.Cog):
                     await ctx.reply(f'Этот пидор отказался. Ну и больно надо трахаться с такими.')
                 else:
                     pass
-                    
+
             except asyncio.TimeoutError:
                 await ctx.reply(f'Короче, он не ответил вовремя. Ну и хуй с ним, с другим поебусь.')
         except:
@@ -162,26 +165,26 @@ class PrikolsCog(commands.Cog):
         cursor.execute("SELECT orders_count FROM orders WHERE user_id = ?", (ctx.author.id,))
         order = cursor.fetchone()
         if action.lower() == 'минет':
-            await ctx.send(f'**Меллори**: Ну... приступаю')
+            msg = await ctx.send(f'**Меллори**: Ну... приступаю')
             await asyncio.sleep(3)
-            await ctx.send(f'**Меллори**: *снимает штаны {ctx.author.name}*')
+            await msg.edit(f'**Меллори**: *снимает штаны {ctx.author.name}*')
             await asyncio.sleep(3)
-            await ctx.send(f'**Меллори**: *жестко облизывает хуй и яйца*')
+            await msg.edit(f'**Меллори**: *жестко облизывает хуй и яйца*')
             await asyncio.sleep(3)
-            await ctx.send(f'**Меллори**: _Ну что, нравится?_')
+            await msg.edit(f'**Меллори**: _Ну что, нравится?_')
             await asyncio.sleep(3)
-            await ctx.send(f'**Меллори**: *жестко заглатывет и трогает яйца*')
+            await msg.edit(f'**Меллори**: *жестко заглатывет и трогает яйца*')
             await asyncio.sleep(3)
-            await ctx.send('*проходит 5 минут*')
-            await ctx.send(f'**Меллори**: *надрачивает*')
+            await msg.edit('*проходит 5 минут*')
+            await msg.edit(f'**Меллори**: *надрачивает*')
             await asyncio.sleep(3)
-            await ctx.send(f'**Меллори**: _Обосперми мне лицо!_')
+            await msg.edit(f'**Меллори**: _Обосперми мне лицо!_')
             await asyncio.sleep(3)
-            await ctx.send(f'**{ctx.author.name}**: *кончил на еблет*')
+            await msg.edit(f'**{ctx.author.name}**: *кончил на еблет*')
             await asyncio.sleep(1)
-            await ctx.send(f'**Меллори**: *еблет в сперме*')
+            await msg.edit(f'**Меллори**: *еблет в сперме*')
             await asyncio.sleep(3)
-            await ctx.send(f'**Меллори**: Всё, с тебя 300 бачей, сучка')
+            await msg.edit(f'**Меллори**: Всё, с тебя 300 бачей, сучка')
             if order is None:
                 cursor.execute("INSERT INTO orders (user_id, orders_count) VALUES (?, 1)", (ctx.author.id, ))
                 conn.commit()
@@ -190,38 +193,38 @@ class PrikolsCog(commands.Cog):
                 orders += 1
                 cursor.execute("UPDATE orders SET orders_count = ? WHERE user_id = ?", (orders, ctx.author.id))
                 conn.commit()
-            
+
         elif action.lower() == 'анал':
-            await ctx.send(f'> **Меллори**: Ммм... Ну давай, хули')
+            msg = await ctx.send(f'> **Меллори**: Ммм... Ну давай, хули')
             await asyncio.sleep(3)
-            await ctx.send('> **Меллори**: *раздевается*')
+            await msg.edit('> **Меллори**: *раздевается*')
             await asyncio.sleep(3)
-            await ctx.send('> **Меллори**: *трясет жопой*')
+            await msg.edit('> **Меллори**: *трясет жопой*')
             await asyncio.sleep(3)
-            await ctx.send('> **Меллори**: _Чего ждем, ковбой?_')
+            await msg.edit('> **Меллори**: _Чего ждем, ковбой?_')
             await asyncio.sleep(3)
-            await ctx.send(f'- **{ctx.author.name}**: *надевает гандон*')
+            await msg.edit(f'- **{ctx.author.name}**: *надевает гандон*')
             await asyncio.sleep(3)
-            await ctx.send(f'- **{ctx.author.name}**: *водит хуем по очку*')
+            await msg.edit(f'- **{ctx.author.name}**: *водит хуем по очку*')
             await asyncio.sleep(3)
-            await ctx.send(f'- **{ctx.author.name}**: *вставляет и начинает трахать*')
+            await msg.edit(f'- **{ctx.author.name}**: *вставляет и начинает трахать*')
             await asyncio.sleep(3)
-            await ctx.send('> **Меллори**: **АХ! ДАВАЙ, ТРАХАЙ МЕНЯ!**')
+            await msg.edit('> **Меллори**: **АХ! ДАВАЙ, ТРАХАЙ МЕНЯ!**')
             await asyncio.sleep(3)
-            await ctx.send(f'- **{ctx.author.name}**: _Ну че, сука, нравится?_')
+            await msg.edit(f'- **{ctx.author.name}**: _Ну че, сука, нравится?_')
             await asyncio.sleep(3)
-            await ctx.send(f'> **Меллори**: _О, да, продолжай...._')
+            await msg.edit(f'> **Меллори**: _О, да, продолжай...._')
             await asyncio.sleep(3)
-            await ctx.send('*прошло полчаса, Меллори вся потекла*')
-            await ctx.send(f'- **{ctx.author.name}**: *достает хуй и начинает дрочить*')
+            await msg.edit('*прошло полчаса, Меллори вся потекла*')
+            await msg.edit(f'- **{ctx.author.name}**: *достает хуй и начинает дрочить*')
             await asyncio.sleep(3)
-            await ctx.send('> **Меллори**: *открыла рот и ждет спермы*')
+            await msg.edit('> **Меллори**: *открыла рот и ждет спермы*')
             await asyncio.sleep(3)
-            await ctx.send(f'- **{ctx.author.name}**: *жестко кончает в рот Меллори*')
+            await msg.edit(f'- **{ctx.author.name}**: *жестко кончает в рот Меллори*')
             await asyncio.sleep(3)
-            await ctx.send('> **Меллори**: *весь рот и лицо в сперме*')
+            await msg.edit('> **Меллори**: *весь рот и лицо в сперме*')
             await asyncio.sleep(3)
-            await ctx.send('> **Меллори**: _Неплохой у тебя револьвер, ковбой, а теперь гони 900 бачей нахуй_')
+            await msg.edit('> **Меллори**: _Неплохой у тебя револьвер, ковбой, а теперь гони 900 бачей нахуй_')
             if order is None:
                 cursor.execute("INSERT INTO orders (user_id, orders_count) VALUES (?, 1)", (ctx.author.id, ))
                 conn.commit()
@@ -230,28 +233,28 @@ class PrikolsCog(commands.Cog):
                 orders += 1
                 cursor.execute("UPDATE orders SET orders_count = ? WHERE user_id = ?", (orders, ctx.author.id))
                 conn.commit()
-            
+
         elif action.lower() == 'дрочка':
-            await ctx.send('> **Меллори**: Тебя это так заводит? Окей..')
+            msg = await ctx.send('> **Меллори**: Тебя это так заводит? Окей..')
             await asyncio.sleep(3)
-            await ctx.send('> **Меллори**: *встаёт на колени*')
+            await msg.edit('> **Меллори**: *встаёт на колени*')
             await asyncio.sleep(3)
-            await ctx.send(f'> **Меллори**: *снимает штаны с {ctx.author.name}*')
+            await msg.edit(f'> **Меллори**: *снимает штаны с {ctx.author.name}*')
             await asyncio.sleep(3)
-            await ctx.send(f'> **Меллори**: *люто надрачивает хуёк {ctx.author.name}*')
+            await msg.edit(f'> **Меллори**: *люто надрачивает хуёк {ctx.author.name}*')
             await asyncio.sleep(3)
-            await ctx.send(f'- **{ctx.author.name}**: Да... Продолжай в том же духе, шлюшка.')
+            await msg.edit(f'- **{ctx.author.name}**: Да... Продолжай в том же духе, шлюшка.')
             await asyncio.sleep(3)
-            await ctx.send(f'> **Меллори**: _Да, мой господин!~_')
+            await msg.edit(f'> **Меллори**: _Да, мой господин!~_')
             await asyncio.sleep(3)
-            await ctx.send(f'*проходит 20 минут, {ctx.author.name} на грани завершения*')
-            await ctx.send('> **Меллори**: _Кончи мне в носяру, ты же так этого хочешь!_')
+            await msg.edit(f'*проходит 20 минут, {ctx.author.name} на грани завершения*')
+            await msg.edit('> **Меллори**: _Кончи мне в носяру, ты же так этого хочешь!_')
             await asyncio.sleep(3)
-            await ctx.send(f'- **{ctx.author.name}**: *кончил в носяру*')
+            await msg.edit(f'- **{ctx.author.name}**: *кончил в носяру*')
             await asyncio.sleep(1)
-            await ctx.send('> **Меллори**: *захлёбывается в сперме*')
+            await msg.edit('> **Меллори**: *захлёбывается в сперме*')
             await asyncio.sleep(3)
-            await ctx.send('> **Меллори**: Не забываемые *откашливается* ощущения... С тебя 1400 бачей за такой крутой мув, сынок')
+            await msg.edit('> **Меллори**: Не забываемые *откашливается* ощущения... С тебя 1400 бачей за такой крутой мув, сынок')
             if order is None:
                 cursor.execute("INSERT INTO orders (user_id, orders_count) VALUES (?, 1)", (ctx.author.id, ))
                 conn.commit()
@@ -260,28 +263,28 @@ class PrikolsCog(commands.Cog):
                 orders += 1
                 cursor.execute("UPDATE orders SET orders_count = ? WHERE user_id = ?", (orders, ctx.author.id))
                 conn.commit()
-            
+
         elif action == '69':
-            await ctx.send('> **Меллори**: Ну, давай, раздевайся...')
+            msg = await ctx.send('> **Меллори**: Ну, давай, раздевайся...')
             await asyncio.sleep(3)
-            await ctx.send(f'> **Меллори и {ctx.author.name}**: *раздеваются и сосутся*')
+            await msg.edit(f'> **Меллори и {ctx.author.name}**: *раздеваются и сосутся*')
             await asyncio.sleep(3)
-            await ctx.send(f'> **Меллори**: *ложится на {ctx.author.name} и начинает сосать писюнчик*')
+            await msg.edit(f'> **Меллори**: *ложится на {ctx.author.name} и начинает сосать писюнчик*')
             await asyncio.sleep(3)
-            await ctx.send(f'- **{ctx.author.name}**: *активно лижет пиздёнку Меллори*')
+            await msg.edit(f'- **{ctx.author.name}**: *активно лижет пиздёнку Меллори*')
             await asyncio.sleep(3)
-            await ctx.send(f'> **Меллори**: Давай... лижи мою пизду, сучка!')
+            await msg.edit(f'> **Меллори**: Давай... лижи мою пизду, сучка!')
             await asyncio.sleep(3)
-            await ctx.send(f'- **{ctx.author.name}**: *подходит к вальгалле*')
-            await ctx.send(f'> **Меллори**: *чувствует это и начинает активно дрочить, насаживаясь пиздой на еблет {ctx.author.name}*')
+            await msg.edit(f'- **{ctx.author.name}**: *подходит к вальгалле*')
+            await msg.edit(f'> **Меллори**: *чувствует это и начинает активно дрочить, насаживаясь пиздой на еблет {ctx.author.name}*')
             await asyncio.sleep(3)
-            await ctx.send(f'- **{ctx.author.name}**: *обкончал весь еблет Меллори*')
+            await msg.edit(f'- **{ctx.author.name}**: *обкончал весь еблет Меллори*')
             await asyncio.sleep(1)
-            await ctx.send('> **Меллори**: *проглотила все до единой капли*')
+            await msg.edit('> **Меллори**: *проглотила все до единой капли*')
             await asyncio.sleep(3)
-            await ctx.send(f'> **Меллори**: *ебейше сквиртанула на еблет {ctx.author.name}*')
+            await msg.edit(f'> **Меллори**: *ебейше сквиртанула на еблет {ctx.author.name}*')
             await asyncio.sleep(3)
-            await ctx.send(f'> **Меллори**: *Как же я ебейше тебя намочила, {ctx.author.name}, давай свои 2200 бачей, а то после этого мне нужно идти жестко гантели 20 кг поднимать.*')
+            await msg.edit(f'> **Меллори**: *Как же я ебейше тебя намочила, {ctx.author.name}, давай свои 2200 бачей, а то после этого мне нужно идти жестко гантели 20 кг поднимать.*')
             if order is None:
                 cursor.execute("INSERT INTO orders (user_id, orders_count) VALUES (?, 1)", (ctx.author.id, ))
                 conn.commit()
